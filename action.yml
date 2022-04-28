@@ -1,7 +1,7 @@
 name: Ruby Build and Cache Dependencies
 inputs:
   ruby-version:
-    required: false
+    required: true
     type: string
     default: default
   bundler-env:
@@ -13,6 +13,8 @@ runs:
   steps:
     - uses: actions/checkout@v3
     - uses: ruby/setup-ruby@v1
+      env:
+        BUNDLER_ENV: ${{ inputs.bundler-env }}
       with:
         ruby-version: ${{ inputs.ruby-version }}
         bundler-cache: true # runs 'bundle install' and caches installed gems automatically
